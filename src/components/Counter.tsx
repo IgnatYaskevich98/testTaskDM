@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useCallback} from 'react';
 import style from "./Counter.module.css";
 
 type CounterType = {
@@ -7,8 +7,8 @@ type CounterType = {
 }
 export const Counter: FC<CounterType> = React.memo(({count, setCount}) => {
     count % 2 === 0 ? document.body.style.backgroundColor = 'lightslategray' : document.body.style.backgroundColor = 'white'
-    const onClickDecrement = () => setCount(count - 1)
-    const onClickIncrement = () => setCount(count + 1)
+    const onClickDecrement = useCallback(() => setCount(count - 1), [setCount,count])
+    const onClickIncrement = useCallback(() => setCount(count + 1), [setCount,count])
     return (
         <div className={style.container}>
             <div className={style.screen}>{count}</div>
