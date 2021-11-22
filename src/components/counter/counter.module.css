@@ -7,7 +7,13 @@
     align-items: center;
     justify-content: space-evenly;
     border-radius: 15px;
-    background: dimgrey;
+    margin: 5px;
+}
+
+.deleteButton {
+    display: flex;
+    justify-content: end;
+
 }
 
 .screen {
@@ -50,7 +56,7 @@
     border: 4px solid;
     border-radius: 15px;
     background: white;
-    width: 75px;
+    width: 90px;
     height: 50px;
     font-size: 20px;
     display: flex;
