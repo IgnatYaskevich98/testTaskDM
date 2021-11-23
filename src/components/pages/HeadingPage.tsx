@@ -8,7 +8,7 @@ type HeadingPageType = {
     counters: CountType[]
     total: number
 }
-export const HeadingPage: FC<HeadingPageType> = ({total, counters}) => {
+export const HeadingPage: FC<HeadingPageType> = React.memo(({total, counters}) => {
     const dispatch = useDispatch()
 
     const addCounter = useCallback(() => dispatch(countersActionsCreators.addCounter([...counters, {
@@ -22,5 +22,5 @@ export const HeadingPage: FC<HeadingPageType> = ({total, counters}) => {
             <Heading counters={counters} total={total} addCounter={addCounter} resetCounter={resetCounter}/>
         </div>
     );
-};
+});
 

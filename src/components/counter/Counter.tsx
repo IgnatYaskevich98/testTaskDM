@@ -4,11 +4,10 @@ import {useDispatch} from "react-redux";
 import {countersActionsCreators} from "../../redux-store/counterReducer";
 
 type CounterType = {
-    remove: (id: string, val: number) => void
     id: string
     total: number
 }
-export const Counter: FC<CounterType> = (({total, remove, id}) => {
+export const Counter: FC<CounterType> = React.memo(({total, id}) => {
     const dispatch = useDispatch()
     const [val, setValue] = useState<number>(0)
 
@@ -27,10 +26,13 @@ export const Counter: FC<CounterType> = (({total, remove, id}) => {
         dispatch(countersActionsCreators.setTotalCount(total - val))
     }, [dispatch, total, val])
 
+    const removeCounter = useCallback((id: string, val: number,) => {
+        dispatch(countersActionsCreators.removeCounter(id, val))
+    },[dispatch])
     return (
         <div className={style.container}
              style={val % 2 === 0 ? {backgroundColor: 'dimgrey'} : {backgroundColor: 'white'}}>
-            <button className={style.buttonElement} onClick={() => remove(id, val)}>Remove</button>
+            <button className={style.buttonElement} onClick={() => removeCounter(id, val)}>Remove</button>
             <div className={style.screen}>{val}</div>
             <div className={style.information}>{val % 2 === 0 ? `Введено чётное число` : `Введено нечётное число`}</div>
             <div className={style.buttons}>
